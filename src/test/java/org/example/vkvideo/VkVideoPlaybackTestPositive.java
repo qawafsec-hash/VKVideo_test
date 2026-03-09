@@ -6,6 +6,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.appium.SelenideAppium;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -70,6 +71,16 @@ public class VkVideoPlaybackTestPositive {
     @AfterAll
     static void tearDown() {
         if (driver != null) driver.quit();
+    }
+
+    @AfterEach
+    void closeApp() {
+        if (driver != null) {
+            try {
+                driver.terminateApp(APP_PACKAGE);
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     @Test
